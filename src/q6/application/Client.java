@@ -9,7 +9,7 @@ public class Client {
 
     public static void main(String[] args) {
 
-        // Creating Quizz and registering Questions
+        /* Creating Quizz and registering Questions */
 
         Quiz quiz = new Quiz();
 
@@ -31,39 +31,46 @@ public class Client {
         q3.addAnswer("He died in the Battle of the Blackwater", false);
         q3.addAnswer("Brienne of Tarth stabbed him", false);
         q3.addAnswer("He was killed by his own brother", false);
-        q3.addAnswer("Renly was assassinated by a shadow demon borne from Melisandre", true);
+        q3.addAnswer("Renly was murdered by a shadow demon Melisandre gave birth to", true);
         quiz.registerQuestion(q3);
 
 
-        // Printing Quiz questions and reading answers
+        /* Printing Quiz questions and reading answers */
 
         Scanner sc = new Scanner(System.in); // reads from standard input
+
+        // Asks username
+        System.out.print("What is your name? ");
+        String user = sc.nextLine();
+        System.out.println("Ok, " + user + ", let's get started!\n");
+        System.out.println("------------------------------------------------------");
 
         int nQuestions = quiz.getNumberOfQuestions();
 
         for (int i = 0; i < nQuestions; i++) {
             // Prints question
-            System.out.print(">> ");
+            System.out.print("** ");
             System.out.println(quiz.getQuestionByIndex(i));
 
             // Asks for answer
-            System.out.print("Which one is the correct answer? ");
+            System.out.print(">> Which one is the correct answer? ");
             int ans = Integer.parseInt(sc.nextLine());
 
             // Checks if user chose the right answer
             if (quiz.checkAnswerToQuestion(i, ans)) {
-                System.out.println("Right answer! Congrats\n");
+                System.out.println(">> Right answer, congrats!!!");
             } else {
-                System.out.println("Oops... Wrong answer\n");
+                System.out.println(">> Oops... Wrong answer :(");
                 //System.out.printf("Right answer: --- \n\n");
             }
+
+            System.out.println("------------------------------------------------------");
         }
 
-        // Printing results
+        /* Printing results */
 
-        System.out.println("UserName: ---"); // TODO: get user name
-        System.out.printf("Got %d answers right and %d answers wrong!\n",
-                quiz.getRightAnswersCounter(), quiz.getWrongAnswersCounter());
+        System.out.printf("\n>> %s, you got %d answers right and %d answers wrong!\n",
+                user, quiz.getRightAnswersCounter(), quiz.getWrongAnswersCounter());
 
     }
 }
