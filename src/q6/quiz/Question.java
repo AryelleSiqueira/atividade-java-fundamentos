@@ -41,7 +41,7 @@ public class Question {
         return this.answers.get(rightAnswerIndex);
     }
 
-    public boolean CheckAnswer(int option) {
+    public boolean checkAnswer(int option) {
         return option == (rightAnswerIndex + 1);
     }
 
