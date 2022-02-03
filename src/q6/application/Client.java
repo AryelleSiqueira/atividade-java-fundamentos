@@ -59,6 +59,8 @@ public class Client {
         System.out.printf("\n>> %s, you got %d answers right and %d answers wrong!\n",
                 user, quiz.getRightAnswersCounter(), quiz.getWrongAnswersCounter());
 
+
+        sc.close();
     }
 
 

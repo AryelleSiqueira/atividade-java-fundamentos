@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Question {
 
-    private String question;        // references question
-    private List<String> answers;   // saves all answers
+    private String question;            // references question
+    private List<String> answers;       // saves all answers
     private int rightAnswerIndex;   // position of the right answer in the collection
 
 
@@ -16,9 +16,8 @@ public class Question {
     }
 
     public void addAnswer(String answer, boolean isTrueOrFalse) {
-        // TODO: there can only be one right answer
         if (isTrueOrFalse) {
-            this.rightAnswerIndex = answers.size();
+            this.rightAnswerIndex = answers.size(); // overrides if right answer was already set
         }
         this.answers.add(answer);
     }
@@ -32,7 +31,7 @@ public class Question {
     }
 
     @Override
-    public String toString() { // TODO: yet to implement
+    public String toString() {
         StringBuilder qNa = new StringBuilder(this.question);
         qNa.append("\n");
 
