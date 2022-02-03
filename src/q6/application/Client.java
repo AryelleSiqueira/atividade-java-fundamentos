@@ -13,7 +13,7 @@ public class Client {
         Quiz quiz = new Quiz();
         registerQuestions(quiz);
 
-        /* Printing Quiz questions and reading answers */
+        /* Prints Quiz questions and reads answers */
 
         Scanner sc = new Scanner(System.in); // reads from standard input
 
@@ -23,34 +23,47 @@ public class Client {
         System.out.println("Ok, " + user + ", let's get started!\n");
         System.out.println("------------------------------------------------------");
 
+        // Loops over list of questions from quiz
         int nQuestions = quiz.getNumberOfQuestions();
 
         for (int i = 0; i < nQuestions; i++) {
+
             // Prints question
             System.out.print("** ");
+            quiz.getQuestionByIndex(i);
+
             System.out.println(quiz.getQuestionByIndex(i));
 
             // Asks for answer
             System.out.print(">> Which one is the correct answer? ");
 
             Integer ans = null;
-            while (ans == null) {
+            Boolean isRight = null;
+
+            // Asks for answer until a valid input is given
+            while (ans == null || isRight == null) {
                 try {
                     ans = Integer.parseInt(sc.nextLine());
-                } catch (NumberFormatException e) {
+                    isRight = quiz.checkAnswerToQuestion(i, ans);
+                }
+                catch (NumberFormatException e) {   // input is not an integer
                     System.out.println("[ERROR] Not a valid input! Try again");
+                    System.out.print(">> Which one is the correct answer? ");
+                }
+                catch (InvalidOptionException e) {  // user chosen option does not exist
+                    System.out.println("[ERROR] " + e.getMessage() + "! Try again");
                     System.out.print(">> Which one is the correct answer? ");
                 }
             }
 
             // Checks if user chose the right answer
-            if (quiz.checkAnswerToQuestion(i, ans)) {
+            if (isRight) {
                 System.out.println(">> Right answer, congrats!!!");
-            } else {
+            }
+            else {
                 System.out.println(">> Oops... Wrong answer :(");
                 //System.out.printf("Right answer: --- \n\n");
             }
-
             System.out.println("------------------------------------------------------");
         }
 
@@ -58,7 +71,6 @@ public class Client {
 
         System.out.printf("\n>> %s, you got %d answers right and %d answers wrong!\n",
                 user, quiz.getRightAnswersCounter(), quiz.getWrongAnswersCounter());
-
 
         sc.close();
     }

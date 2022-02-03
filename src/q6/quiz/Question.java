@@ -26,7 +26,10 @@ public class Question {
         return this.answers.get(rightAnswerIndex);
     }
 
-    public boolean checkAnswer(int option) {
+    public boolean checkAnswer(int option) throws InvalidOptionException {
+        if (option > this.answers.size() || option < 1) {
+            throw new InvalidOptionException("There's no such option");
+        }
         return option == (rightAnswerIndex + 1);
     }
 
