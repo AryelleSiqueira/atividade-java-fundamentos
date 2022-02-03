@@ -23,20 +23,6 @@ public class Question {
         this.answers.add(answer);
     }
 
-    public String getAllAnswers() {
-        StringBuilder answers = new StringBuilder("");
-
-        int i = 1;
-        for (String ans:  this.answers) {
-            answers.append(i + ") ");
-            answers.append(ans);
-            answers.append("\n");
-            i++;
-        }
-
-        return answers.toString();
-    }
-
     public String getRightAnswer() {
         return this.answers.get(rightAnswerIndex);
     }
@@ -47,6 +33,16 @@ public class Question {
 
     @Override
     public String toString() { // TODO: yet to implement
-        return "";
+        StringBuilder qNa = new StringBuilder(this.question);
+        qNa.append("\n");
+
+        int i = 1;
+        for (String ans:  this.answers) {
+            qNa.append(i + ") ");
+            qNa.append(ans);
+            qNa.append("\n");
+            i++;
+        }
+        return qNa.toString();
     }
 }
