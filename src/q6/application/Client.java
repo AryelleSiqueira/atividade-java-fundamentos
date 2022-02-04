@@ -2,6 +2,7 @@ package q6.application;
 
 import q6.quiz.*;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Client {
@@ -34,26 +35,24 @@ public class Client {
 
             System.out.println(quiz.getQuestionByIndex(i));
 
-            // Asks for answer
-            System.out.print(">> Which one is the correct answer? ");
-
+            // Asks for answer until a valid input is given
             Integer ans = null;
             Boolean isRight = null;
 
-            // Asks for answer until a valid input is given
             while (ans == null || isRight == null) {
+                System.out.print(">> Which one is the correct answer? ");
+
                 try {
-                    ans = Integer.parseInt(sc.nextLine());
+                    ans = sc.nextInt();
                     isRight = quiz.checkAnswerToQuestion(i, ans);
                 }
-                catch (NumberFormatException e) {   // input is not an integer
+                catch (InputMismatchException e) {   // input is not an integer
                     System.out.println("[ERROR] Not a valid input! Try again");
-                    System.out.print(">> Which one is the correct answer? ");
                 }
                 catch (InvalidOptionException e) {  // user chosen option does not exist
                     System.out.println("[ERROR] " + e.getMessage() + "! Try again");
-                    System.out.print(">> Which one is the correct answer? ");
                 }
+                sc.nextLine();
             }
 
             // Checks if user chose the right answer
