@@ -7,6 +7,9 @@ public class Employee {
 
 
     public Employee(String name, double salary) {
+        if (salary < 0) {
+            throw new InvalidValueException("'" + salary + "' is not a valid salary!");
+        }
         this.name = name;
         this.salary = salary;
     }
@@ -33,16 +36,16 @@ public class Employee {
     }
 
     /**
-     * @return -
+     * @return bonus or discount according to salary
      */
     public double getBonification() {
         if (this.salary <= 1000.0) {
-            return this.salary * 0.2;
+            return this.salary * 0.2; // 20%
         }
         if (this.salary <= 2000.0) {
-            return this.salary * 0.1;
+            return this.salary * 0.1; // 10%
         }
-        return this.salary * -0.1;
+        return this.salary * -0.1; // -10%
     }
 
     @Override
