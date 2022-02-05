@@ -29,8 +29,9 @@ public class Client {
 
         // Logs in to system
         try {
-            sys.logIn(username, password);
-            System.out.println(getMessage() + ", you've successfully logged in to our system.");
+            User user = sys.logIn(username, password);
+            System.out.println(getMessage() + ", " + user.getName() +
+                    "! You've successfully logged in to our system.");
         }
         catch (FailedToLogInException e) {      // login and/or password invalid
             System.out.println(e.getMessage());
@@ -39,11 +40,11 @@ public class Client {
         sc.close();
     }
 
-
+    // Returns message depending on time of the day
     public static String getMessage() {
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("HH:mm");
-        String[] time = LocalTime.now().format(df).split(":");
-        int hour = Integer.parseInt(time[0]);
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("HH");
+        String time = LocalTime.now().format(df);
+        int hour = Integer.parseInt(time);
 
         if (hour >= 0 && hour < 6) {
             return "Good madrugation";
@@ -58,5 +59,4 @@ public class Client {
             return "Good evening";
         }
     }
-
 }

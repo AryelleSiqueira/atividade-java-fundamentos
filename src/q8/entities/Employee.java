@@ -36,7 +36,8 @@ public class Employee {
     }
 
     /**
-     * @return bonus or discount according to salary
+     * @return bonus or discount according to salary: positive value if bonus,
+     * negative values if discount
      */
     public double getBonification() {
         if (this.salary <= 1000.0) {

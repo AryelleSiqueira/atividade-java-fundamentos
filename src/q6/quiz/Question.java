@@ -6,8 +6,8 @@ import java.util.List;
 public class Question {
 
     private String question;            // references question
-    private List<String> answers;       // saves all answers
-    private int rightAnswerIndex;   // position of the right answer in the collection
+    private List<String> answers;       // saves all answers/options
+    private int rightAnswerIndex;       // position of the right answer in the collection
 
 
     public Question(String question) {
@@ -15,6 +15,12 @@ public class Question {
         this.answers = new ArrayList<>();
     }
 
+    /**
+     * Add answer/option to question.
+     * @param answer to be added to list of options
+     * @param isTrueOrFalse true if option is the correct answer to question, false otherwise.
+     * There can only be one right answer (overrides if right answer was already set)
+     */
     public void addAnswer(String answer, boolean isTrueOrFalse) {
         if (isTrueOrFalse) {
             this.rightAnswerIndex = answers.size(); // overrides if right answer was already set
@@ -22,10 +28,19 @@ public class Question {
         this.answers.add(answer);
     }
 
+    /**
+     * @return right answer to question
+     */
     public String getRightAnswer() {
         return this.answers.get(rightAnswerIndex);
     }
 
+    /**
+     * Checks if chosen option is correct.
+     * @param option number corresponding to any answer
+     * @return true if chosen option is correct, returns false otherwise
+     * @throws InvalidOptionException if option does not correspond to any answer
+     */
     public boolean checkAnswer(int option) throws InvalidOptionException {
         if (option > this.answers.size() || option < 1) {
             throw new InvalidOptionException("There's no such option");

@@ -14,11 +14,12 @@ public class Client {
 
         List<Employee> employeeList = new LinkedList<>();
 
+        // Asks for and reads number of employees to be registered
         Scanner sc = new Scanner(System.in);
 
         Integer nEmployees = null;
 
-        while (nEmployees == null) {
+        while (nEmployees == null) { // repeats until a valid input is given
             System.out.print(">> Number of employees you want to register: ");
             try {
                 nEmployees = sc.nextInt();
@@ -27,9 +28,9 @@ public class Client {
             }
             sc.nextLine();
         }
-
         System.out.println("----------------------------------------");
 
+        // Reads and saves employee data
         for (int i = 0; i < nEmployees; i++) {
             System.out.println("Registering employee #" + (i + 1) + ":");
             System.out.print("Name: ");
@@ -38,16 +39,17 @@ public class Client {
             Double salary = null;
             Employee employee = null;
 
-            while (salary == null || employee == null) {
+            // Reads salary
+            while (salary == null || employee == null) { // repeats until a valid input is given
                 System.out.print("Salary: ");
                 try {
                     salary = sc.nextDouble();
                     employee = new Employee(name, salary);
                 }
-                catch (InputMismatchException e) {
+                catch (InputMismatchException e) { // input is not a double value
                     System.out.println("[ERROR] Invalid input! Try again");
                 }
-                catch (InvalidValueException e) {
+                catch (InvalidValueException e) { // negative salary
                     System.out.println("[ERROR] " + e.getMessage() + " Try again");
                 }
                 sc.nextLine();
@@ -58,6 +60,7 @@ public class Client {
         }
         sc.close();
 
+        // Prints list of employees
         for (Employee e : employeeList) {
             System.out.println(e + "\n");
         }

@@ -51,14 +51,23 @@ public class Quiz {
         return isRight;
     }
 
-    // Getters
-
     /**
      * Returns the number of elements in its list of questions.
      * @return number of questions inside its list os questions
      */
     public int getNumberOfQuestions() {
         return this.questions.size();
+    }
+
+    /**
+     * Returns answer to question at the specified position in its list of questions.
+     * @param questionIndex index of corresponding question
+     * @return right answer to question at the specified position
+     * @throws IndexOutOfBoundsException if the questionIndex is out of range
+     */
+    public String getRightAnswerToQuestion(int questionIndex) {
+        Question q = this.questions.get(questionIndex);
+        return q.getRightAnswer();
     }
 
     /**

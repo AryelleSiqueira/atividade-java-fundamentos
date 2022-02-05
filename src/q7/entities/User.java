@@ -12,14 +12,24 @@ public class User {
         this.password = password;
     }
 
+    /**
+     * @return user's name
+     */
     public String getName() {
         return this.name;
     }
 
+    /**
+     * @return user's username
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * @param password to be compared to user's real password
+     * @return boolean indicating if password is correct or not
+     */
     public boolean authenticate(String password) {
         return this.password.equals(password);
     }

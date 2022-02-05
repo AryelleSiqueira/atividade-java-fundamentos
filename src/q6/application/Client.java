@@ -30,7 +30,7 @@ public class Client {
         for (int i = 0; i < nQuestions; i++) {
 
             // Prints question
-            System.out.print("** ");
+            System.out.print("Question: ");
             quiz.getQuestionByIndex(i);
 
             System.out.println(quiz.getQuestionByIndex(i));
@@ -60,8 +60,8 @@ public class Client {
                 System.out.println(">> Right answer, congrats!!!");
             }
             else {
-                System.out.println(">> Oops... Wrong answer :(");
-                //System.out.printf("Right answer: --- \n\n");
+                System.out.print(">> Oops, wrong answer...\t");
+                System.out.printf("(Right answer: '%s')\n", quiz.getRightAnswerToQuestion(i));
             }
             System.out.println("------------------------------------------------------");
         }
